@@ -468,13 +468,18 @@ footer span{color:var(--teal2);}
       <div style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;color:var(--teal);">김민희</div>
       <div style="font-size:.86rem;color:var(--soft);margin-top:.3rem;">부산대 AI융합교육원</div>
     </div>
-    <div class="bubbles r">
-      <div class="bub bub-1"><span class="icon">🥚</span>계란 한판<br>(30)</div>
-      <div class="bub bub-4"><span class="icon">💻</span>반도체(설계)<br>전공</div>
-      <div class="bub bub-3"><span class="icon">🏫</span>부산대<br>AI융합교육원</div>
-      <div class="bub bub-2"><span class="icon">🧠</span>ENTP<br>또는 j</div>
-      <div class="bub bub-5"><span class="icon">💼</span>워커홀릭</div>
-      <div class="bub bub-6"><span class="icon">🎳</span>볼린이</div>
+    <div class="r" style="display:flex;flex-direction:column;align-items:center;gap:1.1rem;">
+      <!-- 윗줄: 2개 가운데 정렬 -->
+      <div style="display:flex;gap:1.1rem;justify-content:center;">
+        <div class="bub bub-4" style="width:130px;height:130px;"><span class="icon">💻</span>반도체(설계)<br>전공</div>
+        <div class="bub bub-3" style="width:130px;height:130px;"><span class="icon">🏫</span>부산대<br>AI융합교육원</div>
+      </div>
+      <!-- 아랫줄: 3개 가운데 정렬 -->
+      <div style="display:flex;gap:1.1rem;justify-content:center;">
+        <div class="bub bub-2" style="width:130px;height:130px;"><span class="icon">🧠</span>ENTP<br>또는 j</div>
+        <div class="bub bub-5" style="width:130px;height:130px;"><span class="icon">💼</span>워커홀릭</div>
+        <div class="bub bub-6" style="width:130px;height:130px;"><span class="icon">🎳</span>볼린이</div>
+      </div>
     </div>
   </div>
 </section>
@@ -861,10 +866,11 @@ footer span{color:var(--teal2);}
       </div>
       <div class="r from-right">
         <div class="scale-box">
-          <span class="icon">⚖️</span>
-          <p><strong>직관적 체중계 비유:</strong></p>
-          <p>정밀한 체중계는 내가 어떤 장소에서 몸무게를 재든 항상 동일한 절대값을 나타냅니다.</p>
-          <p style="margin-top:.6rem;">시험지의 구성이나 타인의 실력에 내 실력 지표가 간섭받지 않도록 수학적으로 완벽히 보정하는 구조입니다.</p>
+          <span class="icon">📏</span>
+          <p><strong>키 측정 비유:</strong></p>
+          <p style="margin-top:.5rem;">내 키가 175cm라면, 줄자로 재든 병원 신체검사에서 재든 항상 175cm입니다. <strong style="color:var(--yellow);">키 자체는 변하지 않으니까요.</strong></p>
+          <p style="margin-top:.6rem;">그런데 고전검사이론은 이렇습니다. 쉬운 시험지로 재면 <strong style="color:var(--yellow);">180cm</strong>, 어려운 시험지로 재면 <strong style="color:var(--yellow);">170cm</strong>가 나오는 <strong style="color:#ff9f9f;">불량 줄자</strong>와 같습니다. 도구에 따라 내 실력이 달라 보이는 거죠.</p>
+          <p style="margin-top:.6rem;">문항반응이론은 어떤 시험지로 재도, 어떤 집단과 함께 응시해도 <strong style="color:var(--yellow);">항상 175cm</strong>가 나오는 정밀한 측정 도구입니다.</p>
         </div>
       </div>
     </div>
