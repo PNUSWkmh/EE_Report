@@ -527,59 +527,80 @@ footer span{color:var(--teal2);}
       <div class="notes"><span class="hl-pink">N</span>: 총 피험자 수 &nbsp;|&nbsp; <span class="hl-blue">X</span>: 각 피험자의 문항점수 (0 또는 1) &nbsp;|&nbsp; <span class="hl-green">Y</span>: 각 피험자의 시험 총점 &nbsp;|&nbsp; r은 +1.00 ~ −1.00 분포</div>
     </div>
 
-    <div class="g2 r" style="margin-top:1.5rem;">
+    <!-- 문항 선택 버튼 (모바일 친화) -->
+    <div class="r" style="margin-top:1.4rem;">
+      <p class="body" style="font-size:.78rem;margin-bottom:.7rem;color:var(--teal);font-weight:800;">👆 문항을 선택하면 해당 문항의 r값이 계산됩니다</p>
+      <div id="colBtns" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;">
+        <span style="font-size:.76rem;font-weight:800;color:var(--soft);align-self:center;margin-right:.2rem;">문항 선택 →</span>
+        <button class="col-btn selected" data-col="0">A</button>
+        <button class="col-btn" data-col="1">B</button>
+        <button class="col-btn" data-col="2">C</button>
+        <button class="col-btn" data-col="3">D</button>
+        <button class="col-btn" data-col="4">E</button>
+        <button class="col-btn" data-col="5">F</button>
+        <button class="col-btn" data-col="6">G</button>
+        <button class="col-btn" data-col="7">H</button>
+        <button class="col-btn" data-col="8">I</button>
+        <button class="col-btn" data-col="9">J</button>
+      </div>
+    </div>
+
+    <style>
+    .col-btn{
+      min-width:36px;height:36px;border-radius:8px;border:1.5px solid var(--border);
+      background:white;color:var(--navy);font-size:.82rem;font-weight:800;
+      cursor:pointer;transition:all .18s;font-family:inherit;
+    }
+    .col-btn:hover{border-color:var(--teal);background:#edfcfe;color:var(--teal);}
+    .col-btn.selected{background:var(--teal);color:white;border-color:var(--teal);
+      box-shadow:0 2px 8px rgba(14,165,176,.35);}
+    /* mobile table: show only selected col + fixed cols */
+    .dt-col{transition:opacity .2s;}
+    .dt-col.hidden{display:none;}
+    </style>
+
+    <div class="g2 r">
+      <!-- 데이터 테이블 (모바일: 선택 문항만 표시) -->
       <div>
-        <p class="body" style="font-size:.78rem;margin-bottom:.5rem;color:var(--teal);font-weight:800;">👆 문항 열 헤더(A~J)를 클릭하면 해당 문항의 r값이 계산됩니다</p>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-          <table id="dataTable" style="min-width:520px;">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1.5px solid var(--border);">
+          <table id="dataTable" style="font-size:.78rem;min-width:0;width:100%;">
             <thead>
               <tr>
-                <th rowspan="2" style="min-width:36px;">피험자<br><span style="color:var(--yellow);font-size:.85em;">N=10</span></th>
-                <th colspan="10">문항점수 (<span style="color:var(--yellow);">X</span>)</th>
-                <th style="background:#0a6e7c;"><span style="color:var(--yellow);">총점<br>(Y)</span></th>
-                <th style="background:#0a6e7c;color:#90e0ef;">XY</th>
-                <th style="background:#0a6e7c;color:#ff9090;">X²</th>
-                <th style="background:#0a6e7c;">Y²</th>
-              </tr>
-              <tr>
-                <th class="col-header" data-col="0" data-tip="A문항 계산">A</th>
-                <th class="col-header" data-col="1" data-tip="B문항 계산">B</th>
-                <th class="col-header" data-col="2" data-tip="C문항 계산">C</th>
-                <th class="col-header" data-col="3" data-tip="D문항 계산">D</th>
-                <th class="col-header" data-col="4" data-tip="E문항 계산">E</th>
-                <th class="col-header" data-col="5" data-tip="F문항 계산">F</th>
-                <th class="col-header" data-col="6" data-tip="G문항 계산">G</th>
-                <th class="col-header" data-col="7" data-tip="H문항 계산">H</th>
-                <th class="col-header" data-col="8" data-tip="I문항 계산">I</th>
-                <th class="col-header" data-col="9" data-tip="J문항 계산">J</th>
-                <th style="background:#0a6e7c;"></th><th style="background:#0a6e7c;"></th>
-                <th style="background:#0a6e7c;"></th><th style="background:#0a6e7c;"></th>
+                <th style="min-width:42px;white-space:nowrap;">피험자<br><span style="color:var(--yellow);">N=10</span></th>
+                <th id="th-col" style="min-width:38px;background:#06b6d4;">문항<br><span id="th-col-name" style="color:var(--yellow);">A</span></th>
+                <th style="background:#0a6e7c;min-width:38px;"><span style="color:var(--yellow);">총점<br>(Y)</span></th>
+                <th style="background:#0a6e7c;color:#90e0ef;min-width:30px;">XY</th>
+                <th style="background:#0a6e7c;color:#ff9090;min-width:30px;">X²</th>
+                <th style="background:#0a6e7c;min-width:34px;">Y²</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="td-g">10</td><td class="td-b">10</td><td class="td-r">1</td><td>100</td></tr>
-              <tr><td>2</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="td-g">6</td><td class="td-b">0</td><td class="td-r">0</td><td>36</td></tr>
-              <tr><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td class="td-g">3</td><td class="td-b">3</td><td class="td-r">1</td><td>9</td></tr>
-              <tr><td>4</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td class="td-g">6</td><td class="td-b">6</td><td class="td-r">1</td><td>36</td></tr>
-              <tr><td>5</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="td-g">7</td><td class="td-b">7</td><td class="td-r">1</td><td>49</td></tr>
-              <tr><td>6</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="td-g">8</td><td class="td-b">8</td><td class="td-r">1</td><td>64</td></tr>
-              <tr><td>7</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="td-g">4</td><td class="td-b">0</td><td class="td-r">0</td><td>16</td></tr>
-              <tr><td>8</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="td-g">2</td><td class="td-b">0</td><td class="td-r">0</td><td>4</td></tr>
-              <tr><td>9</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="td-g">5</td><td class="td-b">5</td><td class="td-r">1</td><td>25</td></tr>
-              <tr><td>10</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td class="td-g">9</td><td class="td-b">9</td><td class="td-r">1</td><td>81</td></tr>
-              <tr class="tr-s"><td>Σ</td><td>7</td><td>7</td><td>7</td><td>3</td><td>4</td><td>4</td><td>7</td><td>7</td><td>8</td><td>6</td><td>60</td><td>48</td><td>7</td><td>420</td></tr>
+            <tbody id="mobileTableBody">
+              <!-- filled by JS -->
             </tbody>
           </table>
         </div>
-        <table style="margin-top:.9rem;font-size:.76rem;text-align:center;">
-          <thead><tr><th>구분</th><th>상하부지수</th><th>상관계수</th></tr></thead>
-          <tbody>
-            <tr><td style="font-weight:800;">장점</td><td>산출 편의성 극대화<br>집단 간 격차의 명확성</td><td>전체 데이터 활용<br>분할 기준 유연</td></tr>
-            <tr><td style="font-weight:800;">단점</td><td>중간 집단 데이터 누락<br>분할 기준 고정</td><td>도구 의존성 필수<br>수리 연산 복잡</td></tr>
-          </tbody>
-        </table>
+        <!-- sigma row summary cards -->
+        <div id="sigmaCards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem;">
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">Σ<span class="hl-blue" style="font-size:.65rem;">X</span></div>
+            <div id="sig-x" style="font-size:1rem;font-weight:800;color:#1255a0;">7</div>
+          </div>
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">Σ<span class="hl-green" style="font-size:.65rem;">Y</span></div>
+            <div id="sig-y" style="font-size:1rem;font-weight:800;color:#0a7a60;">60</div>
+          </div>
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">ΣXY</div>
+            <div id="sig-xy" style="font-size:1rem;font-weight:800;color:#1255a0;">48</div>
+          </div>
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">ΣY²</div>
+            <div id="sig-y2" style="font-size:1rem;font-weight:800;color:var(--navy);">420</div>
+          </div>
+        </div>
       </div>
 
+      <!-- 계산 풀이 -->
       <div>
         <span class="label" id="calc-label">🧮 계산 풀이 (A번 문항 기준)</span>
         <div class="step-calc" id="calc-box">
@@ -854,19 +875,528 @@ footer span{color:var(--teal2);}
 <section class="sec alt">
   <div class="wrap">
     <div class="sec-title r">📅 문항반응이론의 등장배경</div>
-    <div class="tl-wrap r">
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1916, Binet &amp; Simon</div><div class="tl-desc">📊 문항특성곡선의 시작 — 6번, 41번, 65번 문항 분석, 정답비율 0.75 기준 적용</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1800년대 중반</div><div class="tl-desc">🌱 생물학에서의 연구 — 동/식물의 성장 파악 <span class="tl-hl">(로지스틱 함수)</span></div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1936, Richardson</div><div class="tl-desc">🔗 CTT와 문항반응이론의 문항특성 추정의 관계 증명</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1943, Lawley</div><div class="tl-desc">🔢 고전검사이론과 문항반응이론의 관계 재정립 + 문항특성 추정의 수리적 모형과 방법 제시 <span class="tl-hl">(최대우도추정법: Maximum likelihood estimation)</span></div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1946, Tucker</div><div class="tl-desc">📈 문항특성곡선 <span class="tl-hl">(ICC: Item Characteristic Curve)</span> 용어 사용</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1950, Lazarsfeld</div><div class="tl-desc">🧬 잠재적특성이론 <span class="tl-hl">(Latent trait theory)</span> 용어 사용</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1952, Lord</div><div class="tl-desc">🔭 Lawley의 연구 확장 <span class="tl-hl">(2-모수 정규오자이브모형 소개)</span></div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1958, Birnbaum</div><div class="tl-desc">📐 <span class="tl-hl">로지스틱함수 사용</span> ⇒ 간편한 통계적 기초 절차 제공</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1960, Rasch</div><div class="tl-desc">🚀 <span class="tl-hl">1-모수 로지스틱함수 보급</span>에 기여</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1985, 1992, Baker</div><div class="tl-desc">📚 <span class="tl-hl">문항반응이론 출간</span> (개념이해 + 간편한 계산 절차 소개)</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1980년대부터</div><div class="tl-desc">💻 점진적으로 1~3모수 로지스틱함수에 대한 프로그램 개발 및 보급</div></div>
-    </div>
+    <p class="body r" style="margin-bottom:1.5rem;">👆 각 연도를 클릭하면 세부 설명이 펼쳐집니다</p>
+
+    <style>
+    /* ── INTERACTIVE TIMELINE ── */
+    .itl-wrap{position:relative;padding-left:2.2rem;}
+    .itl-wrap::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;
+      background:linear-gradient(to bottom,var(--teal),var(--purple));border-radius:2px;opacity:.35;}
+    .itl-item{position:relative;margin-bottom:.6rem;}
+    .itl-trigger{display:flex;align-items:center;gap:.7rem;cursor:pointer;
+      padding:.65rem .9rem;border-radius:12px;background:white;
+      border:1.5px solid var(--border);transition:all .22s;user-select:none;
+      position:relative;}
+    .itl-trigger:hover{border-color:var(--teal);background:#f0fafc;transform:translateX(3px);}
+    .itl-trigger.open{border-color:var(--teal);background:linear-gradient(135deg,rgba(14,165,176,.08),rgba(132,94,247,.06));border-bottom-left-radius:0;border-bottom-right-radius:0;}
+    .itl-dot2{position:absolute;left:-2.2rem;top:50%;transform:translateY(-50%);
+      width:13px;height:13px;border-radius:50%;
+      background:linear-gradient(135deg,var(--teal),var(--teal2));
+      border:2.5px solid white;box-shadow:0 0 0 2px var(--teal);
+      transition:transform .2s;}
+    .itl-trigger.open .itl-dot2{transform:translateY(-50%) scale(1.35);box-shadow:0 0 0 4px rgba(14,165,176,.25);}
+    .itl-emoji{font-size:1.3rem;flex-shrink:0;}
+    .itl-head{flex:1;}
+    .itl-year2{font-size:.72rem;font-weight:800;color:var(--teal);display:block;}
+    .itl-short{font-size:.82rem;font-weight:700;color:var(--navy);}
+    .itl-arrow{font-size:.8rem;color:var(--soft);transition:transform .3s;flex-shrink:0;}
+    .itl-trigger.open .itl-arrow{transform:rotate(90deg);}
+
+    .itl-panel{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),opacity .35s ease;
+      opacity:0;background:white;border:1.5px solid var(--teal);border-top:none;
+      border-bottom-left-radius:12px;border-bottom-right-radius:12px;}
+    .itl-panel.open{max-height:600px;opacity:1;}
+    .itl-inner{padding:1.2rem 1.2rem 1.4rem;display:flex;flex-direction:column;gap:1rem;}
+    @media(min-width:560px){.itl-inner{flex-direction:row;align-items:flex-start;}}
+    .itl-text{flex:1;font-size:.84rem;line-height:1.85;color:var(--soft);}
+    .itl-text strong{color:var(--navy);}
+    .itl-text .tag{display:inline-block;background:rgba(14,165,176,.1);color:var(--teal);
+      font-size:.7rem;font-weight:800;padding:.15rem .5rem;border-radius:6px;margin-bottom:.5rem;}
+    .itl-img{flex-shrink:0;width:100%;max-width:200px;align-self:center;}
+    .itl-img svg{width:100%;height:auto;display:block;}
+    </style>
+
+    <div class="itl-wrap r">
+
+      <!-- 1916 Binet & Simon -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">📊</span>
+          <div class="itl-head">
+            <span class="itl-year2">1916, Binet &amp; Simon</span>
+            <span class="itl-short">문항특성곡선의 시작</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">ICC의 원형</span>
+              <p>프랑스 심리학자 Binet과 Simon은 아이들의 <strong>지능 검사</strong>를 만들면서, 나이별 정답률을 곡선으로 처음 표현했습니다.</p>
+              <p style="margin-top:.6rem;">6번 문항은 어린 아이도 잘 맞히고, 41번은 중간, 65번은 어른도 어려워했습니다. 각 문항의 <strong>정답률 75% 지점(0.75)</strong>을 그 나이 수준의 난이도 기준으로 삼았어요. 즉 10명 중 7~8명이 맞히면 그 나이에 적합한 문항! 이것이 문항특성곡선(ICC)의 원형입니다.</p>
+            </div>
+            <div class="itl-img">
+              <!-- S-curve with 3 items illustrated -->
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0fafc"/>
+                <!-- axes -->
+                <line x1="25" y1="130" x2="185" y2="130" stroke="#cbe8ed" stroke-width="1.5"/>
+                <line x1="25" y1="15"  x2="25"  y2="130" stroke="#cbe8ed" stroke-width="1.5"/>
+                <text x="100" y="148" text-anchor="middle" font-size="8" fill="#5a7a96">나이(능력)</text>
+                <text x="10"  y="75"  text-anchor="middle" font-size="8" fill="#5a7a96" transform="rotate(-90,10,75)">정답률</text>
+                <!-- 0.75 line -->
+                <line x1="25" y1="48" x2="185" y2="48" stroke="#ffd166" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="187" y="51" font-size="7" fill="#c08000">0.75</text>
+                <!-- item 6 curve (easy) -->
+                <path d="M30,128 Q50,126 60,110 Q70,90 80,50 Q90,20 110,17" stroke="#0ea5b0" stroke-width="2" fill="none"/>
+                <text x="112" y="16" font-size="7" fill="#0ea5b0" font-weight="bold">6번</text>
+                <!-- item 41 curve (medium) -->
+                <path d="M60,128 Q80,126 90,110 Q100,90 110,50 Q120,20 140,17" stroke="#845ef7" stroke-width="2" fill="none"/>
+                <text x="142" y="16" font-size="7" fill="#845ef7" font-weight="bold">41번</text>
+                <!-- item 65 curve (hard) -->
+                <path d="M100,128 Q120,127 130,115 Q140,98 150,60 Q158,30 175,18" stroke="#ff6b6b" stroke-width="2" fill="none"/>
+                <text x="177" y="17" font-size="7" fill="#ff6b6b" font-weight="bold">65번</text>
+                <!-- dots at 0.75 -->
+                <circle cx="88" cy="48" r="3" fill="#0ea5b0"/>
+                <circle cx="118" cy="48" r="3" fill="#845ef7"/>
+                <circle cx="153" cy="48" r="3" fill="#ff6b6b"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1800s Biology -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🌱</span>
+          <div class="itl-head">
+            <span class="itl-year2">1800년대 중반 (생물학)</span>
+            <span class="itl-short">로지스틱 함수의 탄생</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">S자 곡선의 기원</span>
+              <p>생물학자들이 <strong>동물·식물 개체 수 증가 패턴</strong>을 연구하다가 발견한 함수입니다. 처음엔 천천히 늘다가 → 폭발적으로 늘다가 → 한계에 도달하면 다시 완만해지는, 딱 <strong>S자 모양</strong>이 나왔어요.</p>
+              <p style="margin-top:.6rem;">시험에 적용하면? 능력이 낮으면 정답 확률 ≈ 0%, 중간이면 ≈ 50%, 높으면 ≈ 100%. 이것도 똑같은 S자! 그래서 생물학 공식을 그대로 가져와 사용하게 됩니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0fff4"/>
+                <!-- axes -->
+                <line x1="25" y1="130" x2="185" y2="130" stroke="#6bda9c" stroke-width="1.5"/>
+                <line x1="25" y1="15"  x2="25"  y2="130" stroke="#6bda9c" stroke-width="1.5"/>
+                <!-- population S-curve -->
+                <path d="M30,128 Q60,127 80,115 Q100,95 110,72 Q120,48 140,25 Q155,16 180,15" stroke="#06d6a0" stroke-width="2.5" fill="none"/>
+                <!-- shading under curve -->
+                <path d="M30,128 Q60,127 80,115 Q100,95 110,72 Q120,48 140,25 Q155,16 180,15 L180,130 Z" fill="rgba(6,214,160,.08)"/>
+                <!-- phase labels -->
+                <text x="55"  y="118" font-size="7.5" fill="#1a7a4a">① 완만</text>
+                <text x="95"  y="80"  font-size="7.5" fill="#1a7a4a">② 폭발</text>
+                <text x="155" y="35"  font-size="7.5" fill="#1a7a4a">③ 안정</text>
+                <!-- animal icons (simple) -->
+                <text x="38" y="108" font-size="12">🐇</text>
+                <text x="95" y="60"  font-size="12">🐇🐇🐇</text>
+                <text x="150" y="22" font-size="12">🐇</text>
+                <text x="85" y="148" text-anchor="middle" font-size="8" fill="#1a7a4a">시간 →</text>
+                <text x="10" y="75"  text-anchor="middle" font-size="8" fill="#1a7a4a" transform="rotate(-90,10,75)">개체 수</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1936 Richardson -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🔗</span>
+          <div class="itl-head">
+            <span class="itl-year2">1936, Richardson</span>
+            <span class="itl-short">고전검사이론 ↔ 문항반응이론 연결 증명</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">두 이론의 다리</span>
+              <p>당시엔 고전검사이론(CTT)과 새로운 문항특성곡선 개념이 <strong>서로 별개의 것</strong>처럼 취급됐습니다.</p>
+              <p style="margin-top:.6rem;">Richardson은 "사실 이 둘은 수학적으로 연결되어 있다"는 것을 처음으로 증명했습니다. 고전검사이론의 난이도·변별도 지수가 문항특성곡선의 모수와 <strong>대응 관계</strong>가 있음을 보인 것이죠. 두 이론의 다리를 놓은 셈입니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#fefce8"/>
+                <!-- CTT box -->
+                <rect x="10" y="55" width="72" height="50" rx="8" fill="white" stroke="#ffd166" stroke-width="2"/>
+                <text x="46" y="75" text-anchor="middle" font-size="8" fill="#8a6a00" font-weight="bold">고전검사</text>
+                <text x="46" y="87" text-anchor="middle" font-size="8" fill="#8a6a00" font-weight="bold">이론</text>
+                <text x="46" y="98" text-anchor="middle" font-size="7" fill="#5a7a96">난이도·변별도</text>
+                <!-- IRT box -->
+                <rect x="118" y="55" width="72" height="50" rx="8" fill="white" stroke="#0ea5b0" stroke-width="2"/>
+                <text x="154" y="75" text-anchor="middle" font-size="8" fill="#0a6e7c" font-weight="bold">문항반응</text>
+                <text x="154" y="87" text-anchor="middle" font-size="8" fill="#0a6e7c" font-weight="bold">이론</text>
+                <text x="154" y="98" text-anchor="middle" font-size="7" fill="#5a7a96">문항특성곡선</text>
+                <!-- bridge arrow -->
+                <line x1="82" y1="80" x2="118" y2="80" stroke="#845ef7" stroke-width="2.5" marker-end="url(#arr)" marker-start="url(#arr2)"/>
+                <text x="100" y="72" text-anchor="middle" font-size="7.5" fill="#845ef7" font-weight="bold">수학적</text>
+                <text x="100" y="93" text-anchor="middle" font-size="7.5" fill="#845ef7" font-weight="bold">연결!</text>
+                <!-- person icon -->
+                <text x="92" y="30" text-anchor="middle" font-size="20">🔗</text>
+                <text x="92" y="148" text-anchor="middle" font-size="8" fill="#8a6a00">Richardson (1936)</text>
+                <defs>
+                  <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#845ef7"/></marker>
+                  <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6 Z" fill="#845ef7"/></marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1943 Lawley -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🔢</span>
+          <div class="itl-head">
+            <span class="itl-year2">1943, Lawley</span>
+            <span class="itl-short">최대우도추정법 제시</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">수리적 모형의 확립</span>
+              <p>두 이론의 관계를 더 엄밀하게 재정립하고, <strong>문항 모수를 실제로 계산하는 방법</strong>을 처음으로 제시했습니다.</p>
+              <p style="margin-top:.6rem;">핵심은 <strong>최대우도추정법(MLE)</strong>입니다. 쉽게 말하면 이렇습니다. "이 사람들의 응답 결과가 나올 확률을 가장 높게 만드는 난이도·변별도 값은 얼마일까?" — 역으로 거슬러 올라가 가장 그럴듯한 값을 찾는 방법입니다. 마치 범인을 찾듯 증거(데이터)에서 가장 유력한 용의자(모수)를 추정하는 것이죠.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0f0ff"/>
+                <!-- likelihood curve -->
+                <path d="M20,120 Q50,118 80,90 Q100,65 115,40 Q130,65 145,90 Q165,118 185,120" stroke="#845ef7" stroke-width="2" fill="none"/>
+                <path d="M20,120 Q50,118 80,90 Q100,65 115,40 Q130,65 145,90 Q165,118 185,120 L185,130 L20,130 Z" fill="rgba(132,94,247,.08)"/>
+                <!-- peak marker -->
+                <line x1="115" y1="38" x2="115" y2="130" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <circle cx="115" cy="39" r="5" fill="#ff6b6b"/>
+                <text x="115" y="22" text-anchor="middle" font-size="8" fill="#ff6b6b" font-weight="bold">최대 지점!</text>
+                <text x="115" y="32" text-anchor="middle" font-size="7" fill="#ff6b6b">= 최적 모수값</text>
+                <!-- axes -->
+                <line x1="20" y1="130" x2="185" y2="130" stroke="#c4b5fd" stroke-width="1.5"/>
+                <text x="100" y="148" text-anchor="middle" font-size="8" fill="#5b21b6">모수값 후보</text>
+                <text x="10" y="80"  text-anchor="middle" font-size="7.5" fill="#5b21b6" transform="rotate(-90,10,80)">우도(확률)</text>
+                <text x="100" y="14" text-anchor="middle" font-size="8" fill="#845ef7" font-weight="bold">가장 확률 높은 값 = MLE</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1946 Tucker -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">📈</span>
+          <div class="itl-head">
+            <span class="itl-year2">1946, Tucker</span>
+            <span class="itl-short">"문항특성곡선(ICC)" 이름 탄생</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">네이밍의 역사</span>
+              <p>그동안 개념은 있었지만 <strong>정식 이름이 없었던</strong> 이 곡선에, Tucker가 드디어 공식 명칭을 붙였습니다.</p>
+              <p style="margin-top:.6rem;"><strong>문항특성곡선 (ICC: Item Characteristic Curve)</strong> — "각 문항(Item)이 가진 고유한 특성(Characteristic)을 나타내는 곡선(Curve)"이라는 뜻입니다. 이름이 생기자 학자들이 이 개념을 명확하게 공유하고 연구를 이어갈 수 있게 되었습니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#edfcfe"/>
+                <!-- ICC curve -->
+                <path d="M20,135 Q40,134 60,120 Q80,100 100,72 Q118,45 140,28 Q160,18 185,16" stroke="#0ea5b0" stroke-width="2.5" fill="none"/>
+                <path d="M20,135 Q40,134 60,120 Q80,100 100,72 Q118,45 140,28 Q160,18 185,16 L185,140 L20,140 Z" fill="rgba(14,165,176,.07)"/>
+                <!-- axes -->
+                <line x1="20" y1="140" x2="190" y2="140" stroke="#cbe8ed" stroke-width="1.5"/>
+                <line x1="20" y1="10"  x2="20"  y2="140" stroke="#cbe8ed" stroke-width="1.5"/>
+                <text x="105" y="155" text-anchor="middle" font-size="8" fill="#0a6e7c">능력 (θ)</text>
+                <text x="8" y="80"   text-anchor="middle" font-size="7.5" fill="#0a6e7c" transform="rotate(-90,8,80)">P(정답)</text>
+                <!-- label badge -->
+                <rect x="55" y="50" width="95" height="22" rx="6" fill="white" stroke="#0ea5b0" stroke-width="1.5"/>
+                <text x="102" y="65" text-anchor="middle" font-size="8.5" fill="#0ea5b0" font-weight="bold">ICC (Tucker, 1946)</text>
+                <!-- arrow to curve -->
+                <line x1="95" y1="72" x2="88" y2="80" stroke="#0ea5b0" stroke-width="1.2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1950 Lazarsfeld -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🧬</span>
+          <div class="itl-head">
+            <span class="itl-year2">1950, Lazarsfeld</span>
+            <span class="itl-short">잠재적 특성이론 용어 제안</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">눈에 안 보이는 능력</span>
+              <p>우리가 시험으로 측정하려는 "지능", "수학 실력", "영어 능력" 같은 것들은 사실 <strong>눈에 직접 보이지 않습니다</strong>. 체온처럼 직접 잴 수가 없어요.</p>
+              <p style="margin-top:.6rem;">Lazarsfeld는 이것을 <strong>"잠재적 특성(Latent Trait)"</strong>이라고 이름 붙였습니다. 우리가 시험 문항을 통해 간접적으로 이 숨겨진 특성을 추정하는 것이라는 개념입니다. 이 개념이 문항반응이론의 철학적 토대가 됩니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f5f3ff"/>
+                <!-- iceberg metaphor -->
+                <!-- above water -->
+                <rect x="10" y="5" width="180" height="70" rx="0" fill="rgba(125,211,252,.15)"/>
+                <line x1="10" y1="75" x2="190" y2="75" stroke="#7dd3fc" stroke-width="2" stroke-dasharray="4,3"/>
+                <text x="100" y="18" text-anchor="middle" font-size="7.5" fill="#0369a1">관찰 가능 (시험 점수)</text>
+                <!-- iceberg tip -->
+                <polygon points="70,72 130,72 115,45 85,45" fill="white" stroke="#0ea5b0" stroke-width="1.5"/>
+                <text x="100" y="63" text-anchor="middle" font-size="7" fill="#0ea5b0">문항 응답</text>
+                <!-- below water -->
+                <polygon points="50,78 150,78 170,145 30,145" fill="rgba(132,94,247,.15)" stroke="#845ef7" stroke-width="1.5"/>
+                <text x="100" y="105" text-anchor="middle" font-size="8" fill="#5b21b6" font-weight="bold">잠재적 특성</text>
+                <text x="100" y="118" text-anchor="middle" font-size="7.5" fill="#845ef7">(Latent Trait)</text>
+                <text x="100" y="131" text-anchor="middle" font-size="7" fill="#5a7a96">지능·실력·능력 θ</text>
+                <text x="100" y="155" text-anchor="middle" font-size="7.5" fill="#5b21b6">숨겨진 거대한 능력</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1952 Lord -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🔭</span>
+          <div class="itl-head">
+            <span class="itl-year2">1952, Lord</span>
+            <span class="itl-short">2-모수 모형 소개</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">변별도를 추가하다</span>
+              <p>Lawley의 모형은 문항의 <strong>난이도(b)</strong> 하나만 봤습니다. Lord는 여기에 <strong>변별도(a)</strong>를 추가한 2-모수 모형을 제안했어요.</p>
+              <p style="margin-top:.6rem;"><strong>난이도(b)</strong> = 이 문항이 얼마나 어렵냐 (곡선이 왼쪽·오른쪽으로 이동)<br><strong>변별도(a)</strong> = 이 문항이 얼마나 실력 차이를 잘 구분하냐 (곡선이 완만·가파름)</p>
+              <p style="margin-top:.6rem;">다만 정규분포 기반의 오자이브 함수를 써서 <strong>계산이 매우 복잡</strong>했습니다. 이 문제는 곧 Birnbaum이 해결합니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#fff7ed"/>
+                <!-- axes -->
+                <line x1="20" y1="130" x2="185" y2="130" stroke="#fdba74" stroke-width="1.5"/>
+                <line x1="20" y1="15"  x2="20"  y2="130" stroke="#fdba74" stroke-width="1.5"/>
+                <!-- high a (steep) -->
+                <path d="M20,128 Q70,127 90,100 Q100,75 110,48 Q118,28 130,22" stroke="#c2410c" stroke-width="2" fill="none"/>
+                <text x="132" y="21" font-size="7" fill="#c2410c" font-weight="bold">높은 a</text>
+                <text x="132" y="30" font-size="7" fill="#c2410c">(급경사)</text>
+                <!-- low a (gradual) -->
+                <path d="M20,125 Q50,124 80,115 Q110,100 135,75 Q155,55 185,45" stroke="#0ea5b0" stroke-width="2" fill="none"/>
+                <text x="130" y="42" font-size="7" fill="#0ea5b0" font-weight="bold">낮은 a</text>
+                <text x="130" y="51" font-size="7" fill="#0ea5b0">(완만)</text>
+                <!-- b location arrow -->
+                <line x1="100" y1="128" x2="100" y2="136" stroke="#845ef7" stroke-width="1.5"/>
+                <text x="100" y="148" text-anchor="middle" font-size="7.5" fill="#845ef7" font-weight="bold">b = 난이도</text>
+                <!-- labels -->
+                <text x="8"  y="75" text-anchor="middle" font-size="7.5" fill="#c2410c" transform="rotate(-90,8,75)">P(θ)</text>
+                <text x="100" y="13" text-anchor="middle" font-size="8" fill="#c2410c" font-weight="bold">2-모수 모형</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1958 Birnbaum -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">📐</span>
+          <div class="itl-head">
+            <span class="itl-year2">1958, Birnbaum</span>
+            <span class="itl-short">로지스틱 함수 도입 — 계산 혁명!</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">실용화의 전환점</span>
+              <p>Lord의 복잡한 정규오자이브 함수를 <strong>로지스틱 함수로 대체</strong>했습니다. 두 함수의 결과는 거의 동일한데, 로지스틱 함수는 계산이 훨씬 간단합니다.</p>
+              <p style="margin-top:.6rem;">또한 난이도(b), 변별도(a)에 더해 <strong>추측도(c)</strong>까지 추가한 <strong>3-모수 모형</strong>을 완성했습니다. 추측도란 실력이 없어도 찍어서 맞힐 확률이에요. 5지선다면 최소 0.2는 됩니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0fafc"/>
+                <!-- before: complex normal ogive (red) -->
+                <text x="55" y="16" text-anchor="middle" font-size="7.5" fill="#c03020">정규오자이브 (복잡)</text>
+                <path d="M15,130 Q40,129 60,115 Q78,98 90,75 Q102,52 115,35 Q128,22 150,18" stroke="#c03020" stroke-width="1.5" fill="none" stroke-dasharray="4,2" opacity=".5"/>
+                <!-- after: logistic (teal) -->
+                <text x="145" y="16" text-anchor="middle" font-size="7.5" fill="#0ea5b0">로지스틱 (간단!)</text>
+                <path d="M15,130 Q40,129 60,115 Q78,98 90,75 Q102,52 115,35 Q128,22 150,18" stroke="#0ea5b0" stroke-width="2.5" fill="none"/>
+                <!-- axes -->
+                <line x1="15" y1="130" x2="185" y2="130" stroke="#cbe8ed" stroke-width="1.5"/>
+                <line x1="15" y1="10"  x2="15"  y2="130" stroke="#cbe8ed" stroke-width="1.5"/>
+                <!-- c (guessing) line -->
+                <line x1="15" y1="118" x2="185" y2="118" stroke="#ffd166" stroke-width="1.2" stroke-dasharray="3,2"/>
+                <text x="188" y="121" font-size="7" fill="#c08000">c</text>
+                <text x="100" y="142" text-anchor="middle" font-size="7" fill="#c08000">↑ 추측도(c): 찍어도 이만큼</text>
+                <!-- equation badge -->
+                <rect x="20" y="50" width="85" height="25" rx="5" fill="white" stroke="#0ea5b0" stroke-width="1"/>
+                <text x="62" y="63" text-anchor="middle" font-size="7.5" fill="#0a6e7c" font-weight="bold">3-모수 모형</text>
+                <text x="62" y="72" text-anchor="middle" font-size="7" fill="#5a7a96">a(변별) + b(난이도) + c(추측)</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1960 Rasch -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🚀</span>
+          <div class="itl-head">
+            <span class="itl-year2">1960, Rasch</span>
+            <span class="itl-short">1-모수 모형 보급</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">극단적 단순화</span>
+              <p>덴마크 수학자 Rasch는 반대로 갔습니다. "변별도는 모든 문항이 동일하다고 가정하고 <strong>난이도(b) 하나만으로</strong> 분석하자!"는 1-모수 모형(Rasch Model)을 개발했어요.</p>
+              <p style="margin-top:.6rem;">계산이 극도로 간단해서 현장에 빠르게 보급됐습니다. 지금도 교육평가·심리측정 현장에서 <strong>가장 많이 사용되는 모형</strong> 중 하나입니다. "단순하지만 충분히 정확하다"는 철학입니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0fff4"/>
+                <!-- 3 parallel curves (same slope = same a) -->
+                <!-- easy item -->
+                <path d="M15,128 Q40,126 55,110 Q68,88 78,60 Q88,35 105,22" stroke="#06d6a0" stroke-width="2" fill="none"/>
+                <text x="107" y="21" font-size="7" fill="#06d6a0" font-weight="bold">쉬운 b</text>
+                <!-- medium item -->
+                <path d="M45,128 Q70,126 85,110 Q98,88 108,60 Q118,35 135,22" stroke="#0ea5b0" stroke-width="2" fill="none"/>
+                <text x="137" y="21" font-size="7" fill="#0ea5b0" font-weight="bold">중간 b</text>
+                <!-- hard item -->
+                <path d="M80,128 Q105,126 120,110 Q133,88 143,60 Q153,35 170,22" stroke="#845ef7" stroke-width="2" fill="none"/>
+                <text x="172" y="21" font-size="7" fill="#845ef7" font-weight="bold">어려운 b</text>
+                <!-- axes -->
+                <line x1="15" y1="130" x2="185" y2="130" stroke="#6bda9c" stroke-width="1.5"/>
+                <line x1="15" y1="10"  x2="15"  y2="130" stroke="#6bda9c" stroke-width="1.5"/>
+                <text x="100" y="148" text-anchor="middle" font-size="7.5" fill="#1a7a4a">능력(θ) →</text>
+                <!-- label -->
+                <rect x="20" y="75" width="72" height="22" rx="5" fill="white" stroke="#06d6a0" stroke-width="1"/>
+                <text x="56" y="86" text-anchor="middle" font-size="7.5" fill="#1a7a4a" font-weight="bold">1-모수 모형</text>
+                <text x="56" y="94" text-anchor="middle" font-size="7" fill="#5a7a96">기울기는 모두 동일!</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1985/1992 Baker -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">📚</span>
+          <div class="itl-head">
+            <span class="itl-year2">1985, 1992, Baker</span>
+            <span class="itl-short">교과서 출간 — 학문의 대중화</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">누구나 이해하게</span>
+              <p>그동안 문항반응이론은 수학을 깊이 아는 전문가들만의 영역이었습니다. Baker는 <strong>"개념 설명 + 손으로 직접 계산하는 절차"</strong>를 함께 담은 교과서를 펴냈습니다.</p>
+              <p style="margin-top:.6rem;">복잡한 수식 없이도 이해할 수 있도록 쉽게 쓴 덕분에, 교육학·심리학·의학 등 다양한 분야의 연구자들이 문항반응이론을 활용할 수 있게 됐습니다. <strong>학문의 대중화</strong>에 결정적으로 기여한 셈이죠.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#fff0f5"/>
+                <!-- book icon -->
+                <rect x="55" y="30" width="90" height="95" rx="4" fill="white" stroke="#ffb3c6" stroke-width="2"/>
+                <rect x="55" y="30" width="8"  height="95" rx="2" fill="#ff6b6b"/>
+                <text x="100" y="65" text-anchor="middle" font-size="8" fill="#c0496a" font-weight="bold">Item Response</text>
+                <text x="100" y="78" text-anchor="middle" font-size="8" fill="#c0496a" font-weight="bold">Theory</text>
+                <text x="100" y="98" text-anchor="middle" font-size="8" fill="#5a7a96">개념 이해</text>
+                <text x="100" y="110" text-anchor="middle" font-size="8" fill="#5a7a96">+ 계산 절차</text>
+                <text x="100" y="122" text-anchor="middle" font-size="7.5" fill="#c0496a">Baker (1985/1992)</text>
+                <!-- people icons receiving knowledge -->
+                <text x="20"  y="148" font-size="14">👩‍🎓</text>
+                <text x="55"  y="148" font-size="14">👨‍💼</text>
+                <text x="90"  y="148" font-size="14">👩‍⚕️</text>
+                <text x="125" y="148" font-size="14">👨‍🏫</text>
+                <text x="160" y="148" font-size="14">👩‍🔬</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1980s Programs -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">💻</span>
+          <div class="itl-head">
+            <span class="itl-year2">1980년대부터</span>
+            <span class="itl-short">컴퓨터 프로그램 개발·보급</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">현장 적용의 시대</span>
+              <p>이론은 완성됐지만 계산이 너무 복잡해서 실제 현장에서 쓰기 어려웠습니다. 컴퓨터 보급과 함께 <strong>BILOG, MULTILOG, PARSCALE, IRTPRO</strong> 같은 전용 소프트웨어가 개발됐습니다.</p>
+              <p style="margin-top:.6rem;">수천 명의 응답 데이터도 <strong>버튼 하나로 수 초 안에 분석</strong>이 가능해졌습니다. 대규모 국가 시험(수능, TOEFL, GRE 등)에 문항반응이론이 본격적으로 적용되기 시작한 것이 바로 이 시기입니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0f9ff"/>
+                <!-- monitor -->
+                <rect x="35" y="25" width="130" height="85" rx="6" fill="white" stroke="#7dd3fc" stroke-width="2"/>
+                <rect x="35" y="25" width="130" height="18" rx="6" fill="#0ea5b0"/>
+                <text x="100" y="38" text-anchor="middle" font-size="8" fill="white" font-weight="bold">IRT Analysis Software</text>
+                <!-- screen content: graph -->
+                <path d="M48,90 Q65,88 80,75 Q92,60 100,48 Q108,36 120,32 Q132,28 150,28" stroke="#845ef7" stroke-width="2" fill="none"/>
+                <line x1="48" y1="100" x2="155" y2="100" stroke="#cbe8ed" stroke-width="1"/>
+                <line x1="48" y1="43"  x2="48"  y2="100" stroke="#cbe8ed" stroke-width="1"/>
+                <!-- stand -->
+                <rect x="88" y="110" width="24" height="8" rx="2" fill="#7dd3fc"/>
+                <rect x="70" y="118" width="60" height="5"  rx="2" fill="#7dd3fc"/>
+                <!-- result labels -->
+                <text x="100" y="148" text-anchor="middle" font-size="7.5" fill="#0369a1">수능 · TOEFL · GRE · 심리검사</text>
+                <text x="100" y="158" text-anchor="middle" font-size="7" fill="#5a7a96">모두 문항반응이론 적용!</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /itl-wrap -->
   </div>
 </section>
 
@@ -923,8 +1453,8 @@ footer span{color:var(--teal2);}
           <li><strong>지역독립성 가정</strong>: 문항 간 응답은 서로 독립적이어야 함</li>
           <li>위반 사례: 앞 문항의 정답이 뒷 문항의 힌트가 되는 경우</li>
         </ul></div>
-        <div class="sum-card sum-yellow r scale-in"><h4>⚖️ CTT vs 문항반응이론 비교</h4><ul>
-          <li><strong>CTT</strong>: 검사 총점 기반, 집단·검사 의존성 존재</li>
+        <div class="sum-card sum-yellow r scale-in"><h4>⚖️ 고전검사이론 vs 문항반응이론 비교</h4><ul>
+          <li><strong>고전검사이론</strong>: 검사 총점 기반, 집단·검사 의존성 존재</li>
           <li><strong>문항반응이론</strong>: 문항특성곡선 기반, 불변성 확보</li>
           <li>문항반응이론의 장점: 문항 특성의 불변성</li>
           <li>문항반응이론의 장점: 피험자 능력의 불변성</li>
@@ -955,8 +1485,26 @@ footer span{color:var(--teal2);}
 
 <script>
 /* ══════════════════════════════════════════
-   HAMBURGER MENU
+   INTERACTIVE TIMELINE TOGGLE
 ══════════════════════════════════════════ */
+function toggleTL(trigger) {
+  const panel = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+  // close all others
+  document.querySelectorAll('.itl-trigger.open').forEach(t => {
+    t.classList.remove('open');
+    t.nextElementSibling.classList.remove('open');
+  });
+  // toggle clicked
+  if (!isOpen) {
+    trigger.classList.add('open');
+    panel.classList.add('open');
+    // smooth scroll into view on mobile
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
 function closeMobileMenu(){
   document.getElementById('hbg').classList.remove('open');
   document.getElementById('mobileMenu').classList.remove('open');
@@ -1033,13 +1581,60 @@ function frac(n,d){
 }
 function hl(t,c){return `<span class="${c}">${t}</span>`;}
 
-function calcR(colIdx){
+function buildMobileTable(colIdx) {
+  const tbody = document.getElementById('mobileTableBody');
+  const Y_vals = [10,6,3,6,7,8,4,2,5,9];
+  const Y2_vals= [100,36,9,36,49,64,16,4,25,81];
+  let sigXY=0, sigX2=0;
+  let rows = '';
+  rawData.forEach((row, i) => {
+    const x  = row[colIdx];
+    const y  = row[10];
+    const xy = x * y;
+    const x2 = x * x;
+    sigXY += xy; sigX2 += x2;
+    const even = i%2===1 ? 'style="background:rgba(14,165,176,.04)"' : '';
+    rows += `<tr ${even}>
+      <td style="font-weight:700;">${i+1}</td>
+      <td style="font-weight:800;color:${x===1?'var(--teal)':'var(--soft)'};">${x}</td>
+      <td class="td-g">${y}</td>
+      <td class="td-b">${xy}</td>
+      <td class="td-r">${x2}</td>
+      <td>${Y2_vals[i]}</td>
+    </tr>`;
+  });
+  // sigma row
+  rows += `<tr class="tr-s">
+    <td>Σ</td>
+    <td>${rawData.reduce((s,r)=>s+r[colIdx],0)}</td>
+    <td>60</td>
+    <td>${sigXY}</td>
+    <td>${sigX2}</td>
+    <td>420</td>
+  </tr>`;
+  tbody.innerHTML = rows;
+  return { sigXY, sigX2 };
+}
+
+function calcR(colIdx) {
   const N=rawData.length;
   let sX=0,sY=0,sXY=0,sX2=0,sY2=0;
   rawData.forEach(row=>{sX+=row[colIdx];sY+=row[10];sXY+=row[colIdx]*row[10];sX2+=row[colIdx]*row[colIdx];sY2+=row[10]*row[10];});
   const num=N*sXY-sX*sY, dA=N*sX2-sX*sX, dB=N*sY2-sY*sY;
   const r=Math.sqrt(dA)*Math.sqrt(dB)===0?0:num/(Math.sqrt(dA)*Math.sqrt(dB));
   const name=colNames[colIdx], eb=getEbel(r), rFmt=r.toFixed(2).replace('0.','.').replace('-0.','-.');
+
+  // rebuild mobile table
+  buildMobileTable(colIdx);
+
+  // update column header label
+  document.getElementById('th-col-name').textContent = name;
+
+  // update sigma cards
+  document.getElementById('sig-x').textContent  = sX;
+  document.getElementById('sig-y').textContent  = sY;
+  document.getElementById('sig-xy').textContent = sXY;
+  document.getElementById('sig-y2').textContent = sY2;
 
   // flash animation on calc box
   const box=document.getElementById('calc-box');
@@ -1070,28 +1665,9 @@ function calcR(colIdx){
   badge.style.background=`linear-gradient(135deg,${eb.color},${eb.color}bb)`;
   badge.textContent=`${eb.emoji} ${rFmt} ${eb.cmp} → ${eb.label}`;
 
-  // update table XY + X² columns
-  const tbody=document.getElementById('dataTable').querySelector('tbody');
-  const rows=tbody.querySelectorAll('tr:not(.tr-s)');
-  let sigXY=0,sigX2=0;
-  rows.forEach((tr,i)=>{
-    const x=rawData[i][colIdx],y=rawData[i][10],xy=x*y,x2=x*x;
-    sigXY+=xy;sigX2+=x2;
-    tr.cells[11].textContent=xy;tr.cells[12].textContent=x2;
-    // flash updated cells
-    [tr.cells[1+colIdx],tr.cells[11],tr.cells[12]].forEach(cell=>{
-      cell.style.transition='background .1s';
-      cell.style.background='rgba(14,165,176,.25)';
-      setTimeout(()=>{cell.style.background='';},600);
-    });
-  });
-  const sigRow=tbody.querySelector('.tr-s');
-  sigRow.cells[11].textContent=sigXY;sigRow.cells[12].textContent=sigX2;
-  sigRow.cells[colIdx+1].style.background='rgba(14,165,176,.35)';
-
-  // highlight selected col header
-  document.querySelectorAll('.col-header').forEach((th,i)=>{
-    th.classList.toggle('selected',i===colIdx);
+  // update col buttons
+  document.querySelectorAll('.col-btn').forEach((btn,i)=>{
+    btn.classList.toggle('selected', i===colIdx);
   });
 
   // highlight matching Ebel row
@@ -1102,9 +1678,9 @@ function calcR(colIdx){
   });
 }
 
-// attach col header clicks
-document.querySelectorAll('.col-header').forEach(th=>{
-  th.addEventListener('click',()=>calcR(parseInt(th.dataset.col)));
+// attach col button clicks
+document.querySelectorAll('.col-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>calcR(parseInt(btn.dataset.col)));
 });
 
 // initialise with col A
