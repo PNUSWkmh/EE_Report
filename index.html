@@ -1420,6 +1420,50 @@ function toggleFormulaSection() {
 
     <div class="itl-wrap r">
 
+      <!-- 1800s Biology -->
+      <div class="itl-item">
+        <div class="itl-trigger" onclick="toggleTL(this)">
+          <div class="itl-dot2"></div>
+          <span class="itl-emoji">🌱</span>
+          <div class="itl-head">
+            <span class="itl-year2">1800년대 중반 (생물학)</span>
+            <span class="itl-short">로지스틱 함수의 탄생</span>
+          </div>
+          <span class="itl-arrow">▶</span>
+        </div>
+        <div class="itl-panel">
+          <div class="itl-inner">
+            <div class="itl-text">
+              <span class="tag">S자 곡선의 기원</span>
+              <p>생물학자들이 <strong>동물·식물 개체 수 증가 패턴</strong>을 연구하다가 발견한 함수입니다. 처음엔 천천히 늘다가 → 폭발적으로 늘다가 → 한계에 도달하면 다시 완만해지는, 딱 <strong>S자 모양</strong>이 나왔어요.</p>
+              <p style="margin-top:.6rem;">시험에 적용하면? 능력이 낮으면 정답 확률 ≈ 0%, 중간이면 ≈ 50%, 높으면 ≈ 100%. 이것도 똑같은 S자! 그래서 생물학 공식을 그대로 가져와 사용하게 됩니다.</p>
+            </div>
+            <div class="itl-img">
+              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="160" rx="10" fill="#f0fff4"/>
+                <!-- axes -->
+                <line x1="25" y1="130" x2="185" y2="130" stroke="#6bda9c" stroke-width="1.5"/>
+                <line x1="25" y1="15"  x2="25"  y2="130" stroke="#6bda9c" stroke-width="1.5"/>
+                <!-- population S-curve -->
+                <path d="M30,128 Q60,127 80,115 Q100,95 110,72 Q120,48 140,25 Q155,16 180,15" stroke="#06d6a0" stroke-width="2.5" fill="none"/>
+                <!-- shading under curve -->
+                <path d="M30,128 Q60,127 80,115 Q100,95 110,72 Q120,48 140,25 Q155,16 180,15 L180,130 Z" fill="rgba(6,214,160,.08)"/>
+                <!-- phase labels -->
+                <text x="55"  y="118" font-size="7.5" fill="#1a7a4a">① 완만</text>
+                <text x="95"  y="80"  font-size="7.5" fill="#1a7a4a">② 폭발</text>
+                <text x="155" y="35"  font-size="7.5" fill="#1a7a4a">③ 안정</text>
+                <!-- animal icons (simple) -->
+                <text x="38" y="108" font-size="12">🐇</text>
+                <text x="95" y="60"  font-size="12">🐇🐇🐇</text>
+                <text x="150" y="22" font-size="12">🐇</text>
+                <text x="85" y="148" text-anchor="middle" font-size="8" fill="#1a7a4a">시간 →</text>
+                <text x="10" y="75"  text-anchor="middle" font-size="8" fill="#1a7a4a" transform="rotate(-90,10,75)">개체 수</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 1916 Binet & Simon -->
       <div class="itl-item">
         <div class="itl-trigger" onclick="toggleTL(this)">
@@ -1463,50 +1507,6 @@ function toggleFormulaSection() {
                 <circle cx="88" cy="48" r="3" fill="#0ea5b0"/>
                 <circle cx="118" cy="48" r="3" fill="#845ef7"/>
                 <circle cx="153" cy="48" r="3" fill="#ff6b6b"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1800s Biology -->
-      <div class="itl-item">
-        <div class="itl-trigger" onclick="toggleTL(this)">
-          <div class="itl-dot2"></div>
-          <span class="itl-emoji">🌱</span>
-          <div class="itl-head">
-            <span class="itl-year2">1800년대 중반 (생물학)</span>
-            <span class="itl-short">로지스틱 함수의 탄생</span>
-          </div>
-          <span class="itl-arrow">▶</span>
-        </div>
-        <div class="itl-panel">
-          <div class="itl-inner">
-            <div class="itl-text">
-              <span class="tag">S자 곡선의 기원</span>
-              <p>생물학자들이 <strong>동물·식물 개체 수 증가 패턴</strong>을 연구하다가 발견한 함수입니다. 처음엔 천천히 늘다가 → 폭발적으로 늘다가 → 한계에 도달하면 다시 완만해지는, 딱 <strong>S자 모양</strong>이 나왔어요.</p>
-              <p style="margin-top:.6rem;">시험에 적용하면? 능력이 낮으면 정답 확률 ≈ 0%, 중간이면 ≈ 50%, 높으면 ≈ 100%. 이것도 똑같은 S자! 그래서 생물학 공식을 그대로 가져와 사용하게 됩니다.</p>
-            </div>
-            <div class="itl-img">
-              <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="160" rx="10" fill="#f0fff4"/>
-                <!-- axes -->
-                <line x1="25" y1="130" x2="185" y2="130" stroke="#6bda9c" stroke-width="1.5"/>
-                <line x1="25" y1="15"  x2="25"  y2="130" stroke="#6bda9c" stroke-width="1.5"/>
-                <!-- population S-curve -->
-                <path d="M30,128 Q60,127 80,115 Q100,95 110,72 Q120,48 140,25 Q155,16 180,15" stroke="#06d6a0" stroke-width="2.5" fill="none"/>
-                <!-- shading under curve -->
-                <path d="M30,128 Q60,127 80,115 Q100,95 110,72 Q120,48 140,25 Q155,16 180,15 L180,130 Z" fill="rgba(6,214,160,.08)"/>
-                <!-- phase labels -->
-                <text x="55"  y="118" font-size="7.5" fill="#1a7a4a">① 완만</text>
-                <text x="95"  y="80"  font-size="7.5" fill="#1a7a4a">② 폭발</text>
-                <text x="155" y="35"  font-size="7.5" fill="#1a7a4a">③ 안정</text>
-                <!-- animal icons (simple) -->
-                <text x="38" y="108" font-size="12">🐇</text>
-                <text x="95" y="60"  font-size="12">🐇🐇🐇</text>
-                <text x="150" y="22" font-size="12">🐇</text>
-                <text x="85" y="148" text-anchor="middle" font-size="8" fill="#1a7a4a">시간 →</text>
-                <text x="10" y="75"  text-anchor="middle" font-size="8" fill="#1a7a4a" transform="rotate(-90,10,75)">개체 수</text>
               </svg>
             </div>
           </div>
@@ -1933,7 +1933,7 @@ function toggleFormulaSection() {
   <div class="wrap">
     <div class="sec-title r">📝 문항반응이론 핵심 요약</div>
     <div class="r">
-      <p class="body" style="margin-bottom:1.2rem;">지금까지 학습한 문항반응이론의 핵심 내용을 한눈에 정리합니다.</p>
+      <p class="body" style="margin-bottom:1.2rem;">앞의 전체 내용 핵심만 한눈에 정리합니다.</p>
       <div class="summary-grid">
         <div class="sum-card sum-teal r scale-in"><h4>📖 정의</h4><ul>
           <li>피험자가 문항에 정반응할 확률을 문항특성 및 능력의 함수로 기술하는 통계이론</li>
@@ -1963,9 +1963,8 @@ function toggleFormulaSection() {
           <li>문항반응이론의 장점: 정확한 개인 능력 추정 가능</li>
         </ul></div>
       </div>
-      <div style="margin-top:1.8rem;background:rgba(255,255,255,.08);border-radius:14px;padding:1.4rem 1.8rem;border:2px solid rgba(255,255,255,.15);text-align:center;">
-        <p style="color:var(--yellow);font-size:.72rem;font-weight:800;letter-spacing:.12em;margin-bottom:.6rem;">💡 CORE INSIGHT</p>
-        <p style="color:white;font-size:.98rem;font-weight:800;line-height:1.8;">"문항반응이론은 검사 도구나 집단이 달라져도<br>흔들리지 않는 <span style="color:var(--teal2);">고유한 능력값</span>과 <span style="color:var(--yellow);">고유한 문항 특성값</span>을 분리해 내는 과학입니다."</p>
+      <div style="margin-top:1.8rem;background:rgba(255,255,255,.08);border-radius:14px;padding:1.6rem 1.8rem;border:2px solid rgba(255,255,255,.15);text-align:center;">
+        <p style="color:white;font-size:.95rem;font-weight:800;line-height:1.85;">❝ &nbsp;좋은 시험 문제는 실력 있는 학생과 없는 학생을 정확히 구분해야 하며,<br>문항반응이론은 그 측정을 어떤 상황에서도 일관되게 수행할 수 있는<br>가장 정밀한 도구입니다.&nbsp; ❞</p>
       </div>
     </div>
   </div>
