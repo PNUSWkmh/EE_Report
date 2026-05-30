@@ -194,8 +194,8 @@ strong{color:var(--navy);font-weight:800;}
 /* ══════════════════════════════════════════
    TABLE
 ══════════════════════════════════════════ */
-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:.8rem;}
-th{background:var(--teal);color:white;padding:.55rem .6rem;text-align:center;font-weight:700;font-size:.72rem;}
+table{width:100%;border-collapse:collapse;border-spacing:0;font-size:.78rem;margin-top:.8rem;}
+th{background:var(--teal);color:white;padding:.55rem .6rem;text-align:center;font-weight:700;font-size:.72rem;border:none;}
 td{padding:.48rem .6rem;text-align:center;border-bottom:1px solid var(--border);color:var(--text);transition:background .2s;}
 tr:nth-child(even) td{background:rgba(14,165,176,.04);}
 .td-g{color:#0a7a60;font-weight:800;}
@@ -890,16 +890,16 @@ document.addEventListener('DOMContentLoaded', ()=>runScenario('normal'));
     <div class="g2 r">
       <!-- 데이터 테이블 -->
       <div>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1.5px solid var(--border);">
-          <table id="dataTable" style="font-size:.78rem;min-width:0;width:100%;">
+        <div style="overflow:hidden;border-radius:10px;border:none;-webkit-overflow-scrolling:touch;">
+          <table id="dataTable" style="font-size:.78rem;min-width:0;width:100%;border-collapse:collapse;border-spacing:0;">
             <thead>
               <tr>
-                <th style="min-width:42px;white-space:nowrap;">피험자<br><span style="color:var(--yellow);">N=10</span></th>
-                <th id="th-col" style="min-width:38px;background:#06b6d4;">문항<br><span id="th-col-name" style="color:var(--yellow);">A</span></th>
-                <th style="background:#0a6e7c;min-width:38px;"><span style="color:var(--yellow);">총점<br>(Y)</span></th>
-                <th style="background:#0a6e7c;color:#90e0ef;min-width:30px;">XY</th>
-                <th style="background:#0a6e7c;color:#ff9090;min-width:30px;">X²</th>
-                <th style="background:#0a6e7c;min-width:34px;">Y²</th>
+                <th style="min-width:42px;white-space:nowrap;border:none;">피험자<br><span style="color:var(--yellow);">N=10</span></th>
+                <th id="th-col" style="min-width:38px;background:#06b6d4;border:none;">문항<br><span id="th-col-name" style="color:var(--yellow);">A</span></th>
+                <th style="background:#0a6e7c;min-width:38px;border:none;"><span style="color:var(--yellow);">총점<br>(Y)</span></th>
+                <th style="background:#0a6e7c;color:#90e0ef;min-width:30px;border:none;">XY</th>
+                <th style="background:#0a6e7c;color:#ff9090;min-width:30px;border:none;">X²</th>
+                <th style="background:#0a6e7c;min-width:34px;border:none;">Y²</th>
               </tr>
             </thead>
             <tbody id="mobileTableBody"></tbody>
