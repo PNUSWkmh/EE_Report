@@ -1006,12 +1006,12 @@ function toggleFormulaSection() {
             <tr class="ebel-row" data-min="0.40" data-max="1.01"><td style="font-weight:800;color:var(--teal);">.40 이상</td><td style="font-weight:800;color:var(--teal);">⭐ 변별력이 높은 문항</td></tr>
           </tbody>
         </table>
-        <p style="font-size:.74rem;color:var(--soft);margin-top:.5rem;">💡 위 표는 계산 결과에 따라 자동으로 해당 행이 하이라이트됩니다</p>
+        <p style="font-size:.74rem;color:var(--soft);margin-top:.5rem;">💡 A~J 문항 계산 결과 또는 예시를 클릭하면 해당 행이 자동으로 하이라이트됩니다</p>
       </div>
       <div class="r from-right">
-        <span class="label" style="margin-bottom:.8rem;">📊 예시</span>
+        <span class="label" style="margin-bottom:.8rem;">📊 예시 — 클릭해보세요</span>
         <div class="bar-group" id="barGroup">
-          <div class="bar-item">
+          <div class="bar-item" style="cursor:pointer;" onclick="highlightEbelByR(0.53)" data-r="0.53">
             <div class="bar-label-row">
               <span class="bar-name">🏆 Case A (양질 문항)</span>
               <span class="bar-val" style="color:var(--teal);">r = 0.53</span>
@@ -1019,7 +1019,7 @@ function toggleFormulaSection() {
             <div class="bar-bg"><div class="bar-fill fill-teal" style="--w:53%"></div></div>
             <div class="bar-hint">상위권 득점 집중의 이상적 구조</div>
           </div>
-          <div class="bar-item">
+          <div class="bar-item" style="cursor:pointer;" onclick="highlightEbelByR(0.32)" data-r="0.32">
             <div class="bar-label-row">
               <span class="bar-name">👍 Case B (보통 문항)</span>
               <span class="bar-val" style="color:#c07020;">r = 0.32</span>
@@ -1027,7 +1027,7 @@ function toggleFormulaSection() {
             <div class="bar-bg"><div class="bar-fill fill-yellow" style="--w:32%"></div></div>
             <div class="bar-hint">무난하게 활용 가능한 수준</div>
           </div>
-          <div class="bar-item">
+          <div class="bar-item" style="cursor:pointer;" onclick="highlightEbelByR(0.08)" data-r="0.08">
             <div class="bar-label-row">
               <span class="bar-name">⚠️ Case C (불량 문항)</span>
               <span class="bar-val" style="color:var(--coral);">r = 0.08</span>
@@ -1040,6 +1040,23 @@ function toggleFormulaSection() {
     </div>
   </div>
 </section>
+
+<script>
+function highlightEbelByR(r) {
+  const abs = Math.abs(r);
+  document.querySelectorAll('.ebel-row').forEach(row => {
+    const min = parseFloat(row.dataset.min);
+    const max = parseFloat(row.dataset.max);
+    row.classList.toggle('match', abs >= min && abs < max);
+  });
+  // highlight clicked bar item
+  document.querySelectorAll('.bar-item').forEach(item => {
+    const itemR = parseFloat(item.dataset.r);
+    item.style.borderColor = (itemR === r) ? 'var(--teal)' : '';
+    item.style.background  = (itemR === r) ? 'rgba(14,165,176,.06)' : '';
+  });
+}
+</script>
 
 <!-- 문항추측도 -->
 <section class="sec alt">
