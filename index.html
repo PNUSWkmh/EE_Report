@@ -706,8 +706,29 @@ footer span{color:var(--teal2);}
 <!-- 공식 완전 해설 (인터랙티브) -->
 <section class="sec alt">
   <div class="wrap">
-    <div class="sec-title r">🔬 공식 완전 해설 — 직접 확인해보기</div>
+    <!-- 토글 헤더 -->
+    <div id="formula-toggle-btn"
+      onclick="toggleFormulaSection()"
+      style="display:inline-flex;align-items:center;gap:.7rem;cursor:pointer;
+             padding:.7rem 1.2rem;border-radius:12px;
+             background:white;border:1.5px solid var(--border);
+             transition:all .2s;user-select:none;margin-bottom:0;"
+      onmouseenter="this.style.borderColor='var(--teal)';this.style.background='#edfcfe';"
+      onmouseleave="this.style.borderColor='var(--border)';this.style.background='white';">
+      <span style="font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:800;color:var(--navy);
+                   padding-bottom:.55rem;border-bottom:3px solid var(--teal);display:inline-block;">
+        🔬 공식 완전 해설 — 직접 확인해보기
+      </span>
+      <span id="formula-toggle-icon"
+        style="font-size:.8rem;font-weight:800;color:var(--teal);
+               background:rgba(14,165,176,.1);border-radius:8px;
+               padding:.25rem .7rem;white-space:nowrap;flex-shrink:0;">
+        ▼ 펼치기
+      </span>
+    </div>
 
+    <!-- 토글 콘텐츠 -->
+    <div id="formula-section-body" style="display:none;margin-top:1.2rem;">
     <style>
     .scenario-btns{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.2rem;}
     .sc-btn{padding:.5rem 1rem;border-radius:10px;border:1.5px solid var(--border);
@@ -926,6 +947,58 @@ document.querySelectorAll('.sc-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>runScenario(btn.dataset.sc));
 });
 document.addEventListener('DOMContentLoaded', ()=>runScenario('normal'));
+</script>
+
+    </div><!-- /formula-section-body -->
+  </div>
+</section>
+
+<script>
+function toggleFormulaSection() {
+  const body = document.getElementById('formula-section-body');
+  const icon = document.getElementById('formula-toggle-icon');
+  const btn  = document.getElementById('formula-toggle-btn');
+  const isOpen = body.style.display !== 'none';
+
+  if (isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      body.style.transition = 'max-height .4s ease, opacity .3s ease';
+      body.style.overflow = 'hidden';
+      body.style.opacity = '0';
+      body.style.maxHeight = '0';
+    });
+    setTimeout(() => {
+      body.style.display = 'none';
+      body.style.transition = '';
+      body.style.opacity = '';
+      body.style.maxHeight = '';
+      body.style.overflow = '';
+    }, 400);
+    icon.textContent = '▼ 펼치기';
+    btn.style.borderColor = 'var(--border)';
+    btn.style.background  = 'white';
+  } else {
+    body.style.display  = 'block';
+    body.style.overflow = 'hidden';
+    body.style.opacity  = '0';
+    body.style.maxHeight = '0';
+    requestAnimationFrame(() => {
+      body.style.transition = 'max-height .5s ease, opacity .4s ease';
+      body.style.opacity   = '1';
+      body.style.maxHeight = '3000px';
+    });
+    setTimeout(() => {
+      body.style.overflow   = '';
+      body.style.transition = '';
+      body.style.maxHeight  = '';
+    }, 500);
+    icon.textContent = '▲ 접기';
+    btn.style.borderColor = 'var(--teal)';
+    btn.style.background  = '#edfcfe';
+    runScenario('normal');
+  }
+}
 </script>
 
 <!-- 좋은 vs 나쁜 문항 -->
