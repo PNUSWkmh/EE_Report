@@ -538,8 +538,8 @@ footer span{color:var(--teal2);}
 
       <!-- 핵심 질문 -->
       <div style="background:linear-gradient(135deg,var(--navy),#2a4a7f);border-radius:14px;padding:1.3rem 1.5rem;text-align:center;margin-bottom:1.2rem;">
-        <p style="color:rgba(255,255,255,.6);font-size:.72rem;font-weight:800;letter-spacing:.1em;margin-bottom:.4rem;">💡 공식이 답하는 단 하나의 질문</p>
-        <p style="color:white;font-size:1rem;font-weight:800;line-height:1.6;">"이 문항을 맞힌 사람들이<br>전체 시험도 잘 봤는가?"</p>
+        <p style="color:rgba(255,255,255,.6);font-size:.72rem;font-weight:800;letter-spacing:.1em;margin-bottom:.4rem;">💡 공식이 말하는 단 하나의 질문</p>
+        <p style="color:white;font-size:1rem;font-weight:800;line-height:1.6;">"이 문항을 맞힌 학생들은<br>전체 시험도 잘 봤을까?"</p>
       </div>
 
       <!-- STEP 카드 — 세로 1열 -->
@@ -556,7 +556,7 @@ footer span{color:var(--teal2);}
               문항 점수(X) × 총점(Y) = <strong style="color:var(--navy);">XY</strong><br>
               ✅ 맞히면 X=<strong style="color:var(--teal);">1</strong> → XY = 총점 그대로 남음<br>
               ❌ 틀리면 X=<strong style="color:var(--coral);">0</strong> → XY = <strong style="color:var(--coral);">0 (사라짐)</strong><br>
-              곱하는 순간 틀린 사람은 자동 제외, <strong style="color:var(--navy);">맞힌 사람의 총점만 누적</strong>됩니다.
+              곱하는 순간 틀린 학생은 자동 제외, <strong style="color:var(--navy);">맞힌 학생의 총점만 누적</strong>됩니다.
             </p>
           </div>
         </div>
@@ -567,11 +567,11 @@ footer span{color:var(--teal2);}
             <span style="color:white;font-size:1.2rem;font-weight:800;line-height:1;">2</span>
           </div>
           <div style="flex:1;">
-            <div style="font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:.35rem;">분자 — 맞힌 사람과 틀린 사람의 총점 차이</div>
+            <div style="font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:.35rem;">분자 — 맞힌 학생과 틀린 학생의 총점 차이</div>
             <p style="font-size:.82rem;line-height:1.8;color:var(--soft);">
-              분자는 <strong style="color:var(--navy);">맞힌 사람과 틀린 사람의 총점 차이</strong>를 나타냅니다.<br>
-              분자가 <strong style="color:var(--teal);">크다</strong> → 맞힌 사람은 총점이 높고, 틀린 사람은 총점이 낮다 → <strong style="color:var(--teal);">r ↑</strong><br>
-              분자가 <strong style="color:var(--coral);">0에 가깝다</strong> → 맞힌 사람과 틀린 사람의 총점이 비슷하다 → <strong style="color:var(--coral);">r ↓</strong>
+              분자는 <strong style="color:var(--navy);">맞힌 학생과 틀린 학생의 총점 차이</strong>를 나타냅니다.<br>
+              분자가 <strong style="color:var(--teal);">크다</strong> → 맞힌 학생은 총점이 높고, 틀린 학생은 총점이 낮다 → <strong style="color:var(--teal);">r ↑</strong><br>
+              분자가 <strong style="color:var(--coral);">0에 가깝다</strong> → 맞힌 학생과 틀린 학생의 총점이 비슷하다 → <strong style="color:var(--coral);">r ↓</strong>
             </p>
           </div>
         </div>
@@ -607,130 +607,33 @@ footer span{color:var(--teal2);}
         <div style="background:rgba(255,107,107,.08);border-radius:12px;padding:.9rem;text-align:center;border:1.5px solid rgba(255,107,107,.3);">
           <div style="font-size:1.1rem;font-weight:800;color:var(--coral);">r → −1</div>
           <div style="width:40px;height:2px;background:var(--coral);margin:.4rem auto;border-radius:2px;"></div>
-          <div style="font-size:.76rem;color:var(--soft);line-height:1.6;">맞힌 사람이 오히려 낮음<br><strong style="color:var(--coral);">문항 오류 의심 ❌</strong></div>
+          <div style="font-size:.76rem;color:var(--soft);line-height:1.6;">맞힌 학생이 오히려 낮음<br><strong style="color:var(--coral);">문항 오류 의심 ❌</strong></div>
         </div>
       </div>
 
-      <!-- 구분선 + 다음 단계 안내 -->
-      <div style="text-align:center;padding:.8rem;background:rgba(14,165,176,.05);border-radius:10px;border:1px dashed rgba(14,165,176,.3);">
-        <p style="font-size:.8rem;font-weight:800;color:var(--teal);">👇 이제 실제 데이터로 직접 확인해보겠습니다</p>
-        <p style="font-size:.76rem;color:var(--soft);margin-top:.2rem;">A~J 버튼으로 문항을 선택하면 해당 문항의 r값이 자동 계산됩니다</p>
+    <!-- ★ 공식 완전 해설 토글 (10명 데이터 아래) -->
+    <div style="margin-top:1.2rem;">
+      <div id="formula-toggle-btn"
+        onclick="toggleFormulaSection()"
+        style="display:flex;align-items:center;gap:.7rem;cursor:pointer;
+               padding:.8rem 1.2rem;border-radius:12px;width:100%;justify-content:space-between;
+               background:white;border:1.5px solid var(--border);transition:all .2s;user-select:none;"
+        onmouseenter="this.style.borderColor='var(--teal)';this.style.background='#edfcfe';"
+        onmouseleave="this.style.borderColor='var(--border)';this.style.background='white';">
+        <span style="font-size:.92rem;font-weight:800;color:var(--navy);">
+          🔬 공식 완전 해설 — 직접 확인해보기
+        </span>
+        <span id="formula-toggle-icon"
+          style="font-size:.76rem;font-weight:800;color:var(--teal);
+                 background:rgba(14,165,176,.1);border-radius:8px;
+                 padding:.22rem .7rem;white-space:nowrap;flex-shrink:0;">
+          ▼ 펼치기
+        </span>
       </div>
 
-    </div>
-
-    <!-- 문항 선택 버튼 (모바일 친화) -->
-    <div class="r" style="margin-top:1.2rem;">
-      <div id="colBtns" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;">
-        <span style="font-size:.76rem;font-weight:800;color:var(--soft);align-self:center;margin-right:.2rem;">문항 선택 →</span>
-        <button class="col-btn selected" data-col="0">A</button>
-        <button class="col-btn" data-col="1">B</button>
-        <button class="col-btn" data-col="2">C</button>
-        <button class="col-btn" data-col="3">D</button>
-        <button class="col-btn" data-col="4">E</button>
-        <button class="col-btn" data-col="5">F</button>
-        <button class="col-btn" data-col="6">G</button>
-        <button class="col-btn" data-col="7">H</button>
-        <button class="col-btn" data-col="8">I</button>
-        <button class="col-btn" data-col="9">J</button>
-      </div>
-    </div>
-
+      <!-- 토글 콘텐츠: 시나리오 4개 -->
+      <div id="formula-section-body" style="display:none;margin-top:.8rem;">
     <style>
-    .col-btn{
-      min-width:36px;height:36px;border-radius:8px;border:1.5px solid var(--border);
-      background:white;color:var(--navy);font-size:.82rem;font-weight:800;
-      cursor:pointer;transition:all .18s;font-family:inherit;
-    }
-    .col-btn:hover{border-color:var(--teal);background:#edfcfe;color:var(--teal);}
-    .col-btn.selected{background:var(--teal);color:white;border-color:var(--teal);
-      box-shadow:0 2px 8px rgba(14,165,176,.35);}
-    .dt-col{transition:opacity .2s;}
-    .dt-col.hidden{display:none;}
-    </style>
-
-    <div class="g2 r">
-      <!-- 데이터 테이블 -->
-      <div>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1.5px solid var(--border);">
-          <table id="dataTable" style="font-size:.78rem;min-width:0;width:100%;">
-            <thead>
-              <tr>
-                <th style="min-width:42px;white-space:nowrap;">피험자<br><span style="color:var(--yellow);">N=10</span></th>
-                <th id="th-col" style="min-width:38px;background:#06b6d4;">문항<br><span id="th-col-name" style="color:var(--yellow);">A</span></th>
-                <th style="background:#0a6e7c;min-width:38px;"><span style="color:var(--yellow);">총점<br>(Y)</span></th>
-                <th style="background:#0a6e7c;color:#90e0ef;min-width:30px;">XY</th>
-                <th style="background:#0a6e7c;color:#ff9090;min-width:30px;">X²</th>
-                <th style="background:#0a6e7c;min-width:34px;">Y²</th>
-              </tr>
-            </thead>
-            <tbody id="mobileTableBody"></tbody>
-          </table>
-        </div>
-        <!-- sigma 카드 -->
-        <div id="sigmaCards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem;">
-          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
-            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">Σ<span class="hl-blue" style="font-size:.65rem;">X</span></div>
-            <div id="sig-x" style="font-size:1rem;font-weight:800;color:#1255a0;">7</div>
-          </div>
-          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
-            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">Σ<span class="hl-green" style="font-size:.65rem;">Y</span></div>
-            <div id="sig-y" style="font-size:1rem;font-weight:800;color:#0a7a60;">60</div>
-          </div>
-          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
-            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">ΣXY</div>
-            <div id="sig-xy" style="font-size:1rem;font-weight:800;color:#1255a0;">48</div>
-          </div>
-          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
-            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">ΣY²</div>
-            <div id="sig-y2" style="font-size:1rem;font-weight:800;color:var(--navy);">420</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 계산 풀이 -->
-      <div>
-        <span class="label" id="calc-label">🧮 계산 풀이 (A번 문항 기준)</span>
-        <div class="step-calc" id="calc-box">
-          <p id="calc-step1">r = <span class="frac"><span class="num"><span class="hl-pink">N</span>Σ<span class="hl-blue">X</span><span class="hl-green">Y</span> − (Σ<span class="hl-blue">X</span>)(Σ<span class="hl-green">Y</span>)</span><span class="den">√[<span class="hl-pink">N</span>Σ<span class="hl-blue">X</span>² − (Σ<span class="hl-blue">X</span>)²] · √[<span class="hl-pink">N</span>Σ<span class="hl-green">Y</span>² − (Σ<span class="hl-green">Y</span>)²]</span></span></p>
-          <p id="calc-step2" style="margin-top:.5rem;">= <span class="frac"><span class="num"><span class="hl-pink">10</span>(48) − (<span class="hl-blue">7</span>)(<span class="hl-green">60</span>)</span><span class="den">√[<span class="hl-pink">10</span>(<span class="hl-blue">7</span>) − <span class="hl-blue">7</span>²] · √[<span class="hl-pink">10</span>(420) − <span class="hl-green">60</span>²]</span></span></p>
-          <p id="calc-step3" style="margin-top:.5rem;">= <span class="frac"><span class="num">60</span><span class="den">√21 · √600</span></span> = <span class="frac"><span class="num">60</span><span class="den">30√14</span></span> = <span class="frac"><span class="num">2</span><span class="den">√14</span></span></p>
-          <div class="result" id="calc-result">✅ r = <strong>.53</strong></div>
-          <div id="calc-badge" class="step-badge">⭐ .53 > .40 → 변별력이 높은 문항!</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 공식 완전 해설 (인터랙티브) -->
-<section class="sec alt">
-  <div class="wrap">
-    <!-- 토글 헤더 -->
-    <div id="formula-toggle-btn"
-      onclick="toggleFormulaSection()"
-      style="display:inline-flex;align-items:center;gap:.7rem;cursor:pointer;
-             padding:.7rem 1.2rem;border-radius:12px;
-             background:white;border:1.5px solid var(--border);
-             transition:all .2s;user-select:none;margin-bottom:0;"
-      onmouseenter="this.style.borderColor='var(--teal)';this.style.background='#edfcfe';"
-      onmouseleave="this.style.borderColor='var(--border)';this.style.background='white';">
-      <span style="font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:800;color:var(--navy);
-                   padding-bottom:.55rem;border-bottom:3px solid var(--teal);display:inline-block;">
-        🔬 공식 완전 해설 — 직접 확인해보기
-      </span>
-      <span id="formula-toggle-icon"
-        style="font-size:.8rem;font-weight:800;color:var(--teal);
-               background:rgba(14,165,176,.1);border-radius:8px;
-               padding:.25rem .7rem;white-space:nowrap;flex-shrink:0;">
-        ▼ 펼치기
-      </span>
-    </div>
-
-    <!-- 토글 콘텐츠 -->
-    <div id="formula-section-body" style="display:none;margin-top:1.2rem;">
-    <style>
-    .scenario-btns{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.2rem;}
     .sc-btn{padding:.5rem 1rem;border-radius:10px;border:1.5px solid var(--border);
       background:white;font-size:.78rem;font-weight:800;color:var(--navy);
       cursor:pointer;transition:all .2s;font-family:inherit;line-height:1.3;text-align:center;}
@@ -822,7 +725,7 @@ footer span{color:var(--teal2);}
 <script>
 const SC_DATA = {
   normal: {
-    desc: '<strong>📊 실제 데이터 (A문항)</strong><br>10명 중 7명이 A문항을 맞혔고, 맞힌 사람들의 총점이 대체로 높습니다. 정상적인 변별력 있는 문항입니다.',
+    desc: '<strong>📊 실제 데이터 (A문항)</strong><br>10명 중 7명이 A문항을 맞혔고, 맞힌 학생들의 총점이 대체로 높습니다. 정상적인 변별력 있는 문항입니다.',
     ps: [{x:1,y:10},{x:0,y:6},{x:1,y:3},{x:1,y:6},{x:1,y:7},{x:1,y:8},{x:0,y:4},{x:0,y:2},{x:1,y:5},{x:1,y:9}]
   },
   allcorrect: {
@@ -834,7 +737,7 @@ const SC_DATA = {
     ps: [{x:0,y:10},{x:0,y:6},{x:0,y:3},{x:0,y:6},{x:0,y:7},{x:0,y:8},{x:0,y:4},{x:0,y:2},{x:0,y:5},{x:0,y:9}]
   },
   mixed: {
-    desc: '<strong>🤔 실력과 무관하면?</strong><br>맞힌 사람과 틀린 사람의 총점이 완전히 뒤섞여 있습니다. 분자가 0에 가까워지고 r값이 매우 낮게 나옵니다.',
+    desc: '<strong>🤔 실력과 무관하면?</strong><br>맞힌 학생과 틀린 학생의 총점이 완전히 뒤섞여 있습니다. 분자가 0에 가까워지고 r값이 매우 낮게 나옵니다.',
     ps: [{x:1,y:2},{x:0,y:10},{x:1,y:3},{x:0,y:9},{x:1,y:4},{x:0,y:8},{x:1,y:2},{x:0,y:9},{x:1,y:3},{x:0,y:8}]
   }
 };
@@ -891,9 +794,9 @@ function runScenario(key) {
      (ΣX) × (ΣY) = <strong>${sX} × ${sY} = ${sX*sY}</strong><br>
      분자 = ${N*sXY} − ${sX*sY} = <strong>${numVal}</strong>`;
   document.getElementById('fstep-num-val').textContent =
-    numVal > 5  ? `✅ 분자 = ${numVal} → 맞힌 사람들이 총점도 높은 패턴` :
-    numVal >= 0 ? `⚠️ 분자 = ${numVal} → 맞힌 사람들과 틀린 사람들의 총점이 거의 같음` :
-                  `⚠️ 분자 = ${numVal} → 역패턴 (맞힌 사람이 오히려 총점 낮음)`;
+    numVal > 5  ? `✅ 분자 = ${numVal} → 맞힌 학생들이 총점도 높은 패턴` :
+    numVal >= 0 ? `⚠️ 분자 = ${numVal} → 맞힌 학생들과 틀린 학생들의 총점이 거의 같음` :
+                  `⚠️ 분자 = ${numVal} → 역패턴 (맞힌 학생이 오히려 총점 낮음)`;
   nEl.className = `fstep ${Math.abs(numVal) < 5 ? 'warn' : 'ok'}`;
 
   // 분모 왼쪽
@@ -949,9 +852,96 @@ document.querySelectorAll('.sc-btn').forEach(btn=>{
 document.addEventListener('DOMContentLoaded', ()=>runScenario('normal'));
 </script>
 
-    </div><!-- /formula-section-body -->
-  </div>
-</section>
+        </div><!-- /formula-section-body -->
+      </div><!-- /토글 wrapper -->
+
+      <!-- 구분선 + 다음 단계 안내 -->
+      <div style="text-align:center;padding:.8rem;background:rgba(14,165,176,.05);border-radius:10px;border:1px dashed rgba(14,165,176,.3);">
+        <p style="font-size:.8rem;font-weight:800;color:var(--teal);">👇 이제 실제 데이터로 직접 확인해보겠습니다</p>
+        <p style="font-size:.76rem;color:var(--soft);margin-top:.2rem;">A~J 버튼으로 문항을 선택하면 해당 문항의 r값이 자동 계산됩니다</p>
+      </div>
+
+    </div><!-- /공식 직관적 이해 r div -->
+
+    <!-- 문항 선택 버튼 (모바일 친화) -->
+    <div class="r" style="margin-top:1.2rem;">
+      <div id="colBtns" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;">
+        <span style="font-size:.76rem;font-weight:800;color:var(--soft);align-self:center;margin-right:.2rem;">문항 선택 →</span>
+        <button class="col-btn selected" data-col="0">A</button>
+        <button class="col-btn" data-col="1">B</button>
+        <button class="col-btn" data-col="2">C</button>
+        <button class="col-btn" data-col="3">D</button>
+        <button class="col-btn" data-col="4">E</button>
+        <button class="col-btn" data-col="5">F</button>
+        <button class="col-btn" data-col="6">G</button>
+        <button class="col-btn" data-col="7">H</button>
+        <button class="col-btn" data-col="8">I</button>
+        <button class="col-btn" data-col="9">J</button>
+      </div>
+    </div>
+
+    <style>
+    .col-btn{min-width:36px;height:36px;border-radius:8px;border:1.5px solid var(--border);background:white;color:var(--navy);font-size:.82rem;font-weight:800;cursor:pointer;transition:all .18s;font-family:inherit;}
+    .col-btn:hover{border-color:var(--teal);background:#edfcfe;color:var(--teal);}
+    .col-btn.selected{background:var(--teal);color:white;border-color:var(--teal);box-shadow:0 2px 8px rgba(14,165,176,.35);}
+    .dt-col{transition:opacity .2s;}.dt-col.hidden{display:none;}
+    </style>
+
+    <div class="g2 r">
+      <!-- 데이터 테이블 -->
+      <div>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1.5px solid var(--border);">
+          <table id="dataTable" style="font-size:.78rem;min-width:0;width:100%;">
+            <thead>
+              <tr>
+                <th style="min-width:42px;white-space:nowrap;">피험자<br><span style="color:var(--yellow);">N=10</span></th>
+                <th id="th-col" style="min-width:38px;background:#06b6d4;">문항<br><span id="th-col-name" style="color:var(--yellow);">A</span></th>
+                <th style="background:#0a6e7c;min-width:38px;"><span style="color:var(--yellow);">총점<br>(Y)</span></th>
+                <th style="background:#0a6e7c;color:#90e0ef;min-width:30px;">XY</th>
+                <th style="background:#0a6e7c;color:#ff9090;min-width:30px;">X²</th>
+                <th style="background:#0a6e7c;min-width:34px;">Y²</th>
+              </tr>
+            </thead>
+            <tbody id="mobileTableBody"></tbody>
+          </table>
+        </div>
+        <div id="sigmaCards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem;">
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">Σ<span class="hl-blue" style="font-size:.65rem;">X</span></div>
+            <div id="sig-x" style="font-size:1rem;font-weight:800;color:#1255a0;">7</div>
+          </div>
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">Σ<span class="hl-green" style="font-size:.65rem;">Y</span></div>
+            <div id="sig-y" style="font-size:1rem;font-weight:800;color:#0a7a60;">60</div>
+          </div>
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">ΣXY</div>
+            <div id="sig-xy" style="font-size:1rem;font-weight:800;color:#1255a0;">48</div>
+          </div>
+          <div style="background:rgba(14,165,176,.08);border-radius:8px;padding:.5rem;text-align:center;">
+            <div style="font-size:.65rem;color:var(--soft);font-weight:700;">ΣY²</div>
+            <div id="sig-y2" style="font-size:1rem;font-weight:800;color:var(--navy);">420</div>
+          </div>
+        </div>
+      </div>
+      <!-- 계산 풀이 -->
+      <div>
+        <span class="label" id="calc-label">🧮 계산 풀이 (A번 문항 기준)</span>
+        <div class="step-calc" id="calc-box">
+          <p id="calc-step1">r = <span class="frac"><span class="num"><span class="hl-pink">N</span>Σ<span class="hl-blue">X</span><span class="hl-green">Y</span> − (Σ<span class="hl-blue">X</span>)(Σ<span class="hl-green">Y</span>)</span><span class="den">√[<span class="hl-pink">N</span>Σ<span class="hl-blue">X</span>² − (Σ<span class="hl-blue">X</span>)²] · √[<span class="hl-pink">N</span>Σ<span class="hl-green">Y</span>² − (Σ<span class="hl-green">Y</span>)²]</span></span></p>
+          <p id="calc-step2" style="margin-top:.5rem;">= <span class="frac"><span class="num"><span class="hl-pink">10</span>(48) − (<span class="hl-blue">7</span>)(<span class="hl-green">60</span>)</span><span class="den">√[<span class="hl-pink">10</span>(<span class="hl-blue">7</span>) − <span class="hl-blue">7</span>²] · √[<span class="hl-pink">10</span>(420) − <span class="hl-green">60</span>²]</span></span></p>
+          <p id="calc-step3" style="margin-top:.5rem;">= <span class="frac"><span class="num">60</span><span class="den">√21 · √600</span></span> = <span class="frac"><span class="num">60</span><span class="den">30√14</span></span> = <span class="frac"><span class="num">2</span><span class="den">√14</span></span></p>
+          <div class="result" id="calc-result">✅ r = <strong>.53</strong></div>
+          <div id="calc-badge" class="step-badge">⭐ .53 > .40 → 변별력이 높은 문항!</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    </div><!-- /공식 직관적 이해 r div -->
+
+    <!-- 문항 선택 버튼 (모바일 친화) -->
 
 <script>
 function toggleFormulaSection() {
@@ -1000,6 +990,12 @@ function toggleFormulaSection() {
   }
 }
 </script>
+
+      </div><!-- /formula-section-body -->
+    </div><!-- /토글 wrapper -->
+
+  </div><!-- /wrap -->
+</section>
 
 <!-- 좋은 vs 나쁜 문항 -->
 <section class="sec">
@@ -1150,7 +1146,7 @@ function toggleFormulaSection() {
             <div style="font-size:.82rem;font-weight:800;color:var(--navy);margin-bottom:.3rem;">오답지 매력도 P₀ = (1 − P) / (K − 1)</div>
             <p style="font-size:.8rem;line-height:1.75;color:var(--soft);">
               <strong style="color:var(--navy);">"오답지가 적절히 유혹하고 있는가?"</strong><br>
-              정답을 못 맞힌 나머지 사람들이 각 오답지에 골고루 나뉘어야 한다는 기준값입니다.<br>
+              정답을 못 맞힌 나머지 학생들이 각 오답지에 골고루 나뉘어야 한다는 기준값입니다.<br>
               <span style="color:var(--teal);font-weight:800;">예)</span> P=0.45, 4지선다 → P₀ = (1−0.45)÷3 = <strong style="color:var(--navy);">0.18</strong> → 각 오답지가 약 18%씩 선택되면 적절
             </p>
           </div>
@@ -1589,7 +1585,7 @@ function toggleFormulaSection() {
             <div class="itl-text">
               <span class="tag">수리적 모형의 확립</span>
               <p>두 이론의 관계를 더 엄밀하게 재정립하고, <strong>문항 모수를 실제로 계산하는 방법</strong>을 처음으로 제시했습니다.</p>
-              <p style="margin-top:.6rem;">핵심은 <strong>최대우도추정법(MLE)</strong>입니다. 쉽게 말하면 이렇습니다. "이 사람들의 응답 결과가 나올 확률을 가장 높게 만드는 난이도·변별도 값은 얼마일까?" — 역으로 거슬러 올라가 가장 그럴듯한 값을 찾는 방법입니다. 마치 범인을 찾듯 증거(데이터)에서 가장 유력한 용의자(모수)를 추정하는 것이죠.</p>
+              <p style="margin-top:.6rem;">핵심은 <strong>최대우도추정법(MLE)</strong>입니다. 쉽게 말하면 이렇습니다. "이 학생들의 응답 결과가 나올 확률을 가장 높게 만드는 난이도·변별도 값은 얼마일까?" — 역으로 거슬러 올라가 가장 그럴듯한 값을 찾는 방법입니다. 마치 범인을 찾듯 증거(데이터)에서 가장 유력한 용의자(모수)를 추정하는 것이죠.</p>
             </div>
             <div class="itl-img">
               <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
